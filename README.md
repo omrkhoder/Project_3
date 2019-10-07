@@ -55,15 +55,17 @@ Then paste the contents of the public key created on the local machine
 - Save and exit using CTRL+X and confirm with Y.
 - Restart SSH: `sudo service ssh restart`.
 
-##### 6. Configure the Uncomplicated Firewall (UFW) to only allow incoming connections for SSH (port 2200):
+##### 6. Configure the Uncomplicated Firewall (UFW) to only allow incoming connections for SSH (port 2200), HTTP (port 80), and NTP (port 123):
 
 ```bash
 $ sudo ufw default deny incoming
 $ sudo ufw default allow outgoing
-$ sudo ufw allow www
-$ sudo ufw allow ntp
 $ sudo ufw allow 2200/tcp
+$ sudo ufw allow 80/tcp
+$ sudo ufw allow 123/udp
+$ sudo ufw deny 22
 $ sudo ufw enable
+$ sudo ufw status
 ```
 
 ##### 7. Install and configure Apache to serve a Python mod_wsgi application:
